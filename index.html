@@ -21,36 +21,39 @@ body{
   border-radius:16px;
   max-width:560px;
   width:90%;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
   animation:fade .5s ease;
-  text-align:center;
 }
 
+.center{text-align:center}
+
 p{
-  text-align:left;
-  line-height:1.6;
-  margin:8px 0;
+  line-height:1.7;
+  margin:10px 0;
 }
 
 .buttons{
   margin-top:25px;
   position:relative;
+  height:120px;
 }
 
 button{
-  padding:10px 22px;
+  padding:12px 26px;
   border:none;
-  border-radius:20px;
+  border-radius:25px;
   font-size:16px;
   cursor:pointer;
-  margin:10px;
   color:white;
 }
 
-.yes{ background:#ff5c8a; }
-.no{ background:#6c63ff; position:absolute; }
+.yes{background:#ff5c8a}
+.no{
+  background:#6c63ff;
+  position:absolute;
+}
 
-.hidden{ display:none; }
+.hidden{display:none}
 
 a{
   color:#ff5c8a;
@@ -70,23 +73,19 @@ a{
 <audio id="music" src="muzik.mp3"></audio>
 
 <!-- 1. SAHNE -->
-<div class="box" id="scene1">
+<div class="box center" id="scene1">
   <h2>Hazır mısın?</h2>
-  <div class="buttons">
-    <button class="yes" onclick="goScene2()">Hazırım</button>
-  </div>
+  <button class="yes" onclick="goScene2()">Hazırım</button>
 </div>
 
 <!-- 2. SAHNE -->
-<div class="box hidden" id="scene2">
+<div class="box center hidden" id="scene2">
   <h2>Gerçekten hazır mısın?</h2>
-  <p style="text-align:center">Bundan sonra geri dönüş yok 🙂</p>
-  <div class="buttons">
-    <button class="yes" onclick="goScene3()">Evet hazırım, başla artık</button>
-  </div>
+  <p>Bundan sonra geri dönüş yok.</p>
+  <button class="yes" onclick="goScene3()">Evet hazırım, başla artık</button>
 </div>
 
-<!-- 3. SAHNE (MÜZİK BURADA BAŞLAR) -->
+<!-- 3. SAHNE (UZUN METİN + MÜZİK) -->
 <div class="box hidden" id="scene3">
   <p><strong>Bunu buraya kadar okuduysan, biraz cesaret toplamışım demektir.</strong></p>
 
@@ -98,38 +97,41 @@ a{
   O olmadan hiçbir şey açılmaz.</p>
 
   <p>Ben seni hiçbir zaman RAM gibi görmedim.<br>
-  Geçici bir heves, anlık bir his, gelip geçen bir şey olarak değil.</p>
+  Geçici bir heves, anlık bir his olarak değil.</p>
 
   <p>Sen benim için system32 gibisin.<br>
-  Hayatımın çalışması için gereken yerdesin.<br>
-  Silinemezsin, yok sayılmazsın, yerine başka bir şey konulmaz.</p>
+  Hayatımın çalışması için gereken yerdesin.</p>
 
   <p><em>Ve bir de şu var…</em></p>
 
   <p>Ben sana boşuna “sütlü çikolata” demiyorum.<br>
-  Çünkü herkes bitter sevebilir,<br>
-  ama sütlü çikolata seçilen bir şeydir.<br>
-  Yumuşaktır, tatlıdır,<br>
-  insanın içini rahatlatır.</p>
+  Yumuşak, tatlı ve huzur verici.</p>
 
-  <p>Sen de öylesin.<br>
-  Hayatımın en tatlı, en sakin, en güzel yerindesin.</p>
+  <p>Hayatımın en sakin yerindesin.</p>
 
-  <p><strong>System32 içindeki yerini kabul ediyor musun?</strong></p>
+  <div class="center">
+    <button class="yes" onclick="goScene4()">Devam et</button>
+  </div>
+</div>
 
-  <div class="buttons">
+<!-- 4. SAHNE (KARAR ANI) -->
+<div class="box hidden center" id="scene4">
+  <h3>System32 içindeki yerini kabul ediyor musun?</h3>
+
+  <div class="buttons" id="btnArea">
     <button class="yes" onclick="accept()">Evet</button>
     <button class="no" id="noBtn">Hayır (sıkıysa bas)</button>
   </div>
 </div>
 
 <!-- EVET -->
-<div class="box hidden" id="yesBox">
-  <p><strong>❤️ System32 başarıyla güncellendi ❤️</strong></p>
-  <p>Eğer gerçekten kabul ettiysen,<br>
-  şimdiye kadar en anlamlı noktanı <strong>(.)</strong> atmak ister misin?</p>
+<div class="box hidden center" id="yesBox">
+  <h3>❤️ System32 başarıyla güncellendi ❤️</h3>
   <p>
-    Instagram:
+    Eğer gerçekten kabul ettiysen<br>
+    şimdiye kadar en anlamlı noktanı <strong>(.)</strong> atmak ister misin?
+  </p>
+  <p>
     <a href="https://www.instagram.com/qq.vortex/" target="_blank">
       instagram.com/qq.vortex
     </a>
@@ -137,21 +139,19 @@ a{
 </div>
 
 <!-- HAYIR -->
-<div class="box hidden" id="noBox">
-  <p><strong>Canın sağ olsun.</strong></p>
+<div class="box hidden center" id="noBox">
+  <p>Canın sağ olsun.</p>
   <p>Eğer kabul etmediysen lütfen <strong>2</strong> at<br>
   ve arkadaşlığımıza devam edelim.</p>
-  <p>
-    Instagram:
-    <a href="https://www.instagram.com/qq.vortex/" target="_blank">
-      instagram.com/qq.vortex
-    </a>
-  </p>
+  <a href="https://www.instagram.com/qq.vortex/" target="_blank">
+    instagram.com/qq.vortex
+  </a>
 </div>
 
 <script>
 const music = document.getElementById("music");
 const noBtn = document.getElementById("noBtn");
+const area = document.getElementById("btnArea");
 
 function goScene2(){
   scene1.classList.add("hidden");
@@ -164,22 +164,29 @@ function goScene3(){
   music.play();
 }
 
-// Hayır kaçsın
-noBtn.addEventListener("mouseover", ()=>{
-  const parent = noBtn.parentElement;
-  const maxX = parent.clientWidth - noBtn.offsetWidth;
-  const maxY = parent.clientHeight - noBtn.offsetHeight;
-  noBtn.style.left = Math.random()*maxX + "px";
-  noBtn.style.top  = Math.random()*maxY + "px";
-});
+function goScene4(){
+  scene3.classList.add("hidden");
+  scene4.classList.remove("hidden");
+}
 
 function accept(){
-  scene3.classList.add("hidden");
+  scene4.classList.add("hidden");
   yesBox.classList.remove("hidden");
 }
 
+function escape(){
+  const maxX = area.clientWidth - noBtn.offsetWidth;
+  const maxY = area.clientHeight - noBtn.offsetHeight;
+  noBtn.style.left = Math.random()*maxX + "px";
+  noBtn.style.top  = Math.random()*maxY + "px";
+}
+
+["mouseover","touchstart","click"].forEach(e=>{
+  noBtn.addEventListener(e, escape);
+});
+
 noBtn.addEventListener("click", ()=>{
-  scene3.classList.add("hidden");
+  scene4.classList.add("hidden");
   noBox.classList.remove("hidden");
 });
 </script>
