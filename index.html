@@ -213,7 +213,7 @@ function escape(){
   noBtn.style.top  = Math.random()*maxY + "px";
 }
 
-["mouseover","mousemove","touchstart","click"].forEach(e=>{
+["mouseover","touchstart"].forEach(e=>{
   noBtn.addEventListener(e, escape);
 });
 
