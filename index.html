@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>Sana Bir Şey Söylemem Lazım</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
 <style>
 body{
   margin:0;
@@ -35,7 +37,7 @@ p{
 .buttons{
   margin-top:25px;
   position:relative;
-  height:140px;
+  height:180px;
 }
 
 button{
@@ -51,6 +53,13 @@ button{
 .no{
   background:#6c63ff;
   position:absolute;
+}
+
+.handwrite{
+  font-family:'Pacifico', cursive;
+  font-size:18px;
+  color:#ff5c8a;
+  margin:14px 0;
 }
 
 .hidden{display:none}
@@ -85,42 +94,50 @@ a{
   <button class="yes" onclick="startAll()">Evet hazırım, başla artık</button>
 </div>
 
-<!-- 3. SAHNE (UZUN METİN) -->
+<!-- 3. SAHNE -->
 <div class="box hidden" id="scene3">
   <p><strong>Bunu buraya kadar okuduysan, biraz cesaret toplamışım demektir.</strong></p>
 
-  <p>Bilgisayarlarda iki tür şey vardır.<br>
-  RAM vardır; hızlıdır ama geçicidir.<br>
-  Bilgisayar kapanınca içindekiler silinir.<br>
-  Bir de system32 vardır;<br>
-  bilgisayarın çalışması için en temel yerdir.<br>
-  O olmadan hiçbir şey açılmaz.</p>
+  <p>
+    Bilgisayarlarda iki tür şey vardır.<br>
+    RAM vardır; hızlıdır ama geçicidir.<br>
+    Bilgisayar kapanınca içindekiler silinir.<br>
+    Bir de system32 vardır;<br>
+    bilgisayarın çalışması için en temel yerdir.<br>
+    O olmadan hiçbir şey açılmaz.
+  </p>
 
-  <p>Ben seni hiçbir zaman RAM gibi görmedim.<br>
-  Geçici bir heves olarak değil.</p>
+  <p>
+    Ben seni hiçbir zaman RAM gibi görmedim.<br>
+    Geçici bir heves olarak değil.
+  </p>
 
-  <p>Sen benim için system32 gibisin.<br>
-  Hayatımın çalışması için gereken yerdesin.</p>
+  <p>
+    Sen benim için system32 gibisin.<br>
+    Hayatımın çalışması için gereken yerdesin.
+  </p>
 
-  <p><em>Ve bir de şu var…</em></p>
+  <p class="handwrite">
+    Ben sana boşuna “sütlü çikolata” demiyorum.<br>
+    Herkes bitter / normal sever ama sütlü çikolata bir seçimdir 😉
+  </p>
 
-  <p>Ben sana boşuna “sütlü çikolata” demiyorum.<br>
-  Yumuşak, tatlı ve huzur verici.</p>
-
-  <p>Hayatımın en sakin yerindesin.</p>
+  <p>
+    Yumuşak, tatlı ve huzur verici.
+  </p>
 
   <div class="center">
     <button class="yes" onclick="goScene4()">Devam et</button>
   </div>
 </div>
 
-<!-- 4. SAHNE (SORU) -->
+<!-- 4. SAHNE -->
 <div class="box hidden center" id="scene4">
   <h3>System32 içindeki yerini kabul ediyor musun?</h3>
 
   <div class="buttons" id="btnArea">
     <button class="yes" onclick="accept()">Evet</button>
-    <button class="no" id="noBtn">Hayır (sıkıysa bas)</button>
+    <button class="no" id="noBtn">Hayır</button>
   </div>
 </div>
 
@@ -158,16 +175,24 @@ function goScene2(){
   scene2.classList.remove("hidden");
 }
 
-// MÜZİK + SAHNE BAŞLANGICI (GARANTİ)
 function startAll(){
   scene2.classList.add("hidden");
   scene3.classList.remove("hidden");
 
   music.load();
   music.currentTime = 0;
+  music.volume = 0;
 
-  music.play().catch(() => {
-    setTimeout(() => music.play(), 300);
+  music.play().then(()=>{
+    let v = 0;
+    const fade = setInterval(()=>{
+      if(v < 0.7){
+        v += 0.015;
+        music.volume = v;
+      } else {
+        clearInterval(fade);
+      }
+    }, 200);
   });
 }
 
@@ -188,7 +213,7 @@ function escape(){
   noBtn.style.top  = Math.random()*maxY + "px";
 }
 
-["mouseover","touchstart","click"].forEach(e=>{
+["mouseover","mousemove","touchstart","click"].forEach(e=>{
   noBtn.addEventListener(e, escape);
 });
 
