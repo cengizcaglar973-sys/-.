@@ -23,6 +23,7 @@ body{
   width:90%;
   box-shadow:0 10px 30px rgba(0,0,0,.2);
   animation:fade .5s ease;
+  text-align:center;
 }
 
 p{
@@ -32,7 +33,6 @@ p{
 }
 
 .buttons{
-  text-align:center;
   margin-top:25px;
   position:relative;
 }
@@ -47,16 +47,10 @@ button{
   color:white;
 }
 
-#yesBtn{
-  background:#ff5c8a;
-}
+.yes{ background:#ff5c8a; }
+.no{ background:#6c63ff; position:absolute; }
 
-#no{
-  background:#6c63ff;
-  position:absolute;
-}
-
-.hidden{display:none;}
+.hidden{ display:none; }
 
 a{
   color:#ff5c8a;
@@ -73,7 +67,27 @@ a{
 
 <body>
 
-<div class="box" id="main">
+<audio id="music" src="muzik.mp3"></audio>
+
+<!-- 1. SAHNE -->
+<div class="box" id="scene1">
+  <h2>Hazır mısın?</h2>
+  <div class="buttons">
+    <button class="yes" onclick="goScene2()">Hazırım</button>
+  </div>
+</div>
+
+<!-- 2. SAHNE -->
+<div class="box hidden" id="scene2">
+  <h2>Gerçekten hazır mısın?</h2>
+  <p style="text-align:center">Bundan sonra geri dönüş yok 🙂</p>
+  <div class="buttons">
+    <button class="yes" onclick="goScene3()">Evet hazırım, başla artık</button>
+  </div>
+</div>
+
+<!-- 3. SAHNE (MÜZİK BURADA BAŞLAR) -->
+<div class="box hidden" id="scene3">
   <p><strong>Bunu buraya kadar okuduysan, biraz cesaret toplamışım demektir.</strong></p>
 
   <p>Bilgisayarlarda iki tür şey vardır.<br>
@@ -101,33 +115,34 @@ a{
   <p>Sen de öylesin.<br>
   Hayatımın en tatlı, en sakin, en güzel yerindesin.</p>
 
-  <p><strong>Kısaca demek istediğim şu:</strong></p>
   <p><strong>System32 içindeki yerini kabul ediyor musun?</strong></p>
 
   <div class="buttons">
-    <button id="yesBtn" onclick="yes()">Evet</button>
-    <button id="no">Hayır (sıkıysa bas)</button>
+    <button class="yes" onclick="accept()">Evet</button>
+    <button class="no" id="noBtn">Hayır (sıkıysa bas)</button>
   </div>
 </div>
 
+<!-- EVET -->
 <div class="box hidden" id="yesBox">
   <p><strong>❤️ System32 başarıyla güncellendi ❤️</strong></p>
   <p>Eğer gerçekten kabul ettiysen,<br>
   şimdiye kadar en anlamlı noktanı <strong>(.)</strong> atmak ister misin?</p>
   <p>
-    Instagram: 
+    Instagram:
     <a href="https://www.instagram.com/qq.vortex/" target="_blank">
       instagram.com/qq.vortex
     </a>
   </p>
 </div>
 
+<!-- HAYIR -->
 <div class="box hidden" id="noBox">
   <p><strong>Canın sağ olsun.</strong></p>
   <p>Eğer kabul etmediysen lütfen <strong>2</strong> at<br>
   ve arkadaşlığımıza devam edelim.</p>
   <p>
-    Instagram: 
+    Instagram:
     <a href="https://www.instagram.com/qq.vortex/" target="_blank">
       instagram.com/qq.vortex
     </a>
@@ -135,26 +150,37 @@ a{
 </div>
 
 <script>
-const noBtn = document.getElementById("no");
+const music = document.getElementById("music");
+const noBtn = document.getElementById("noBtn");
 
-// Hayır butonu kaçsın
-noBtn.addEventListener("mouseover", () => {
-  const parent = document.querySelector(".buttons");
-  const maxX = parent.clientWidth - noBtn.offsetWidth;
-  const maxY = parent.clientHeight - noBtn.offsetHeight;
-  noBtn.style.left = Math.random() * maxX + "px";
-  noBtn.style.top  = Math.random() * maxY + "px";
-});
-
-function yes(){
-  document.getElementById("main").classList.add("hidden");
-  document.getElementById("yesBox").classList.remove("hidden");
+function goScene2(){
+  scene1.classList.add("hidden");
+  scene2.classList.remove("hidden");
 }
 
-// Çok nadir yakalanırsa
+function goScene3(){
+  scene2.classList.add("hidden");
+  scene3.classList.remove("hidden");
+  music.play();
+}
+
+// Hayır kaçsın
+noBtn.addEventListener("mouseover", ()=>{
+  const parent = noBtn.parentElement;
+  const maxX = parent.clientWidth - noBtn.offsetWidth;
+  const maxY = parent.clientHeight - noBtn.offsetHeight;
+  noBtn.style.left = Math.random()*maxX + "px";
+  noBtn.style.top  = Math.random()*maxY + "px";
+});
+
+function accept(){
+  scene3.classList.add("hidden");
+  yesBox.classList.remove("hidden");
+}
+
 noBtn.addEventListener("click", ()=>{
-  document.getElementById("main").classList.add("hidden");
-  document.getElementById("noBox").classList.remove("hidden");
+  scene3.classList.add("hidden");
+  noBox.classList.remove("hidden");
 });
 </script>
 
