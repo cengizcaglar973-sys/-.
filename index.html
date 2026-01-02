@@ -35,7 +35,7 @@ p{
 .buttons{
   margin-top:25px;
   position:relative;
-  height:120px;
+  height:140px;
 }
 
 button{
@@ -70,7 +70,7 @@ a{
 
 <body>
 
-<audio id="music" src="muzik.mp3"></audio>
+<audio id="music" src="muzik.mp3" preload="none"></audio>
 
 <!-- 1. SAHNE -->
 <div class="box center" id="scene1">
@@ -82,10 +82,10 @@ a{
 <div class="box center hidden" id="scene2">
   <h2>Gerçekten hazır mısın?</h2>
   <p>Bundan sonra geri dönüş yok.</p>
-  <button class="yes" onclick="goScene3()">Evet hazırım, başla artık</button>
+  <button class="yes" onclick="startAll()">Evet hazırım, başla artık</button>
 </div>
 
-<!-- 3. SAHNE (UZUN METİN + MÜZİK) -->
+<!-- 3. SAHNE (UZUN METİN) -->
 <div class="box hidden" id="scene3">
   <p><strong>Bunu buraya kadar okuduysan, biraz cesaret toplamışım demektir.</strong></p>
 
@@ -97,7 +97,7 @@ a{
   O olmadan hiçbir şey açılmaz.</p>
 
   <p>Ben seni hiçbir zaman RAM gibi görmedim.<br>
-  Geçici bir heves, anlık bir his olarak değil.</p>
+  Geçici bir heves olarak değil.</p>
 
   <p>Sen benim için system32 gibisin.<br>
   Hayatımın çalışması için gereken yerdesin.</p>
@@ -114,7 +114,7 @@ a{
   </div>
 </div>
 
-<!-- 4. SAHNE (KARAR ANI) -->
+<!-- 4. SAHNE (SORU) -->
 <div class="box hidden center" id="scene4">
   <h3>System32 içindeki yerini kabul ediyor musun?</h3>
 
@@ -131,20 +131,20 @@ a{
     Eğer gerçekten kabul ettiysen<br>
     şimdiye kadar en anlamlı noktanı <strong>(.)</strong> atmak ister misin?
   </p>
-  <p>
-    <a href="https://www.instagram.com/qq.vortex/" target="_blank">
-      instagram.com/qq.vortex
-    </a>
-  </p>
+  <a href="https://www.instagram.com/direct/t/17848168302521420/" target="_blank">
+    Sohbete git
+  </a>
 </div>
 
 <!-- HAYIR -->
 <div class="box hidden center" id="noBox">
   <p>Canın sağ olsun.</p>
-  <p>Eğer kabul etmediysen lütfen <strong>2</strong> at<br>
-  ve arkadaşlığımıza devam edelim.</p>
-  <a href="https://www.instagram.com/qq.vortex/" target="_blank">
-    instagram.com/qq.vortex
+  <p>
+    Eğer kabul etmediysen lütfen <strong>2</strong> at<br>
+    ve arkadaşlığımıza devam edelim.
+  </p>
+  <a href="https://www.instagram.com/direct/t/17848168302521420/" target="_blank">
+    Sohbete git
   </a>
 </div>
 
@@ -158,10 +158,17 @@ function goScene2(){
   scene2.classList.remove("hidden");
 }
 
-function goScene3(){
+// MÜZİK + SAHNE BAŞLANGICI (GARANTİ)
+function startAll(){
   scene2.classList.add("hidden");
   scene3.classList.remove("hidden");
-  music.play();
+
+  music.load();
+  music.currentTime = 0;
+
+  music.play().catch(() => {
+    setTimeout(() => music.play(), 300);
+  });
 }
 
 function goScene4(){
