@@ -43,12 +43,16 @@ button{
   border-radius:20px;
   font-size:16px;
   cursor:pointer;
-  background:#ff5c8a;
-  color:white;
   margin:10px;
+  color:white;
+}
+
+#yesBtn{
+  background:#ff5c8a;
 }
 
 #no{
+  background:#6c63ff;
   position:absolute;
 }
 
@@ -101,8 +105,8 @@ a{
   <p><strong>System32 içindeki yerini kabul ediyor musun?</strong></p>
 
   <div class="buttons">
-    <button onclick="yes()">Evet ❤️</button>
-    <button id="no">Hayır</button>
+    <button id="yesBtn" onclick="yes()">Evet</button>
+    <button id="no">Hayır (sıkıysa bas)</button>
   </div>
 </div>
 
@@ -142,13 +146,12 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.top  = Math.random() * maxY + "px";
 });
 
-// Evet akışı
 function yes(){
   document.getElementById("main").classList.add("hidden");
   document.getElementById("yesBox").classList.remove("hidden");
 }
 
-// Hayır'a tıklanırsa (nadiren)
+// Çok nadir yakalanırsa
 noBtn.addEventListener("click", ()=>{
   document.getElementById("main").classList.add("hidden");
   document.getElementById("noBox").classList.remove("hidden");
