@@ -5,125 +5,154 @@
 <title>Sana Bir Şey Söylemem Lazım</title>
 
 <style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff758c, #ff7eb3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: Arial, sans-serif;
-  overflow: hidden;
+body{
+  margin:0;
+  min-height:100vh;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:Arial, sans-serif;
 }
 
-.box {
-  background: white;
-  padding: 30px;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+.box{
+  background:white;
+  padding:30px;
+  border-radius:16px;
+  max-width:560px;
+  width:90%;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  animation:fade .5s ease;
 }
 
-button {
-  padding: 10px 22px;
-  border: none;
-  border-radius: 20px;
-  margin: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  background: #ff5c8a;
-  color: white;
+p{
+  text-align:left;
+  line-height:1.6;
+  margin:8px 0;
 }
 
-textarea {
-  width: 100%;
-  height: 100px;
-  border-radius: 12px;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  resize: none;
+.buttons{
+  text-align:center;
+  margin-top:25px;
+  position:relative;
 }
 
-.heart {
-  position: absolute;
-  bottom: -20px;
-  font-size: 20px;
-  animation: floatUp 5s linear infinite;
+button{
+  padding:10px 22px;
+  border:none;
+  border-radius:20px;
+  font-size:16px;
+  cursor:pointer;
+  background:#ff5c8a;
+  color:white;
+  margin:10px;
 }
 
-@keyframes floatUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-120vh); opacity: 0; }
+#no{
+  position:absolute;
+}
+
+.hidden{display:none;}
+
+a{
+  color:#ff5c8a;
+  font-weight:bold;
+  text-decoration:none;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:scale(.96)}
+  to{opacity:1;transform:scale(1)}
 }
 </style>
 </head>
 
 <body>
 
-<div class="box" id="step1">
-  <h2>Hazır mısın? 💗</h2>
-  <button onclick="goStep(2)">Evet</button>
-  <button id="noBtn1">Hayır</button>
+<div class="box" id="main">
+  <p><strong>Bunu buraya kadar okuduysan, biraz cesaret toplamışım demektir.</strong></p>
+
+  <p>Bilgisayarlarda iki tür şey vardır.<br>
+  RAM vardır; hızlıdır ama geçicidir.<br>
+  Bilgisayar kapanınca içindekiler silinir.<br>
+  Bir de system32 vardır;<br>
+  bilgisayarın çalışması için en temel yerdir.<br>
+  O olmadan hiçbir şey açılmaz.</p>
+
+  <p>Ben seni hiçbir zaman RAM gibi görmedim.<br>
+  Geçici bir heves, anlık bir his, gelip geçen bir şey olarak değil.</p>
+
+  <p>Sen benim için system32 gibisin.<br>
+  Hayatımın çalışması için gereken yerdesin.<br>
+  Silinemezsin, yok sayılmazsın, yerine başka bir şey konulmaz.</p>
+
+  <p><em>Ve bir de şu var…</em></p>
+
+  <p>Ben sana boşuna “sütlü çikolata” demiyorum.<br>
+  Çünkü herkes bitter sevebilir,<br>
+  ama sütlü çikolata seçilen bir şeydir.<br>
+  Yumuşaktır, tatlıdır,<br>
+  insanın içini rahatlatır.</p>
+
+  <p>Sen de öylesin.<br>
+  Hayatımın en tatlı, en sakin, en güzel yerindesin.</p>
+
+  <p><strong>Kısaca demek istediğim şu:</strong></p>
+  <p><strong>System32 içindeki yerini kabul ediyor musun?</strong></p>
+
+  <div class="buttons">
+    <button onclick="yes()">Evet ❤️</button>
+    <button id="no">Hayır</button>
+  </div>
 </div>
 
-<div class="box" id="step2" style="display:none;">
-  <h2>Devam edelim mi?</h2>
-  <button onclick="goStep(3)">Merak ettim</button>
-  <button id="noBtn2">Korktum</button>
+<div class="box hidden" id="yesBox">
+  <p><strong>❤️ System32 başarıyla güncellendi ❤️</strong></p>
+  <p>Eğer gerçekten kabul ettiysen,<br>
+  şimdiye kadar en anlamlı noktanı <strong>(.)</strong> atmak ister misin?</p>
+  <p>
+    Instagram: 
+    <a href="https://www.instagram.com/qq.vortex/" target="_blank">
+      instagram.com/qq.vortex
+    </a>
+  </p>
 </div>
 
-<div class="box" id="step3" style="display:none;">
-  <h2>Sana bir itirafım var…</h2>
-  <textarea id="confession" placeholder="Buraya yazabilirsin..."></textarea>
-  <br><br>
-  <button onclick="sendInstagram()">Instagram’dan Gönder 💌</button>
+<div class="box hidden" id="noBox">
+  <p><strong>Canın sağ olsun.</strong></p>
+  <p>Eğer kabul etmediysen lütfen <strong>2</strong> at<br>
+  ve arkadaşlığımıza devam edelim.</p>
+  <p>
+    Instagram: 
+    <a href="https://www.instagram.com/qq.vortex/" target="_blank">
+      instagram.com/qq.vortex
+    </a>
+  </p>
 </div>
 
 <script>
-function goStep(step) {
-  document.getElementById("step1").style.display = "none";
-  document.getElementById("step2").style.display = "none";
-  document.getElementById("step3").style.display = "none";
-  document.getElementById("step" + step).style.display = "block";
+const noBtn = document.getElementById("no");
+
+// Hayır butonu kaçsın
+noBtn.addEventListener("mouseover", () => {
+  const parent = document.querySelector(".buttons");
+  const maxX = parent.clientWidth - noBtn.offsetWidth;
+  const maxY = parent.clientHeight - noBtn.offsetHeight;
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top  = Math.random() * maxY + "px";
+});
+
+// Evet akışı
+function yes(){
+  document.getElementById("main").classList.add("hidden");
+  document.getElementById("yesBox").classList.remove("hidden");
 }
 
-function moveButton(btn) {
-  btn.style.position = "absolute";
-  btn.style.left = Math.random() * 80 + "%";
-  btn.style.top = Math.random() * 80 + "%";
-}
-
-document.getElementById("noBtn1").onmouseover = function() {
-  moveButton(this);
-};
-document.getElementById("noBtn2").onmouseover = function() {
-  moveButton(this);
-};
-
-function sendInstagram() {
-  const text = document.getElementById("confession").value.trim();
-  if (text === "") {
-    alert("Bir şey yazmadan gönderemezsin ❤️");
-    return;
-  }
-
-  navigator.clipboard.writeText(text);
-  alert("Mesaj kopyalandı 📋\nŞimdi Instagram DM’ye yapıştır ❤️");
-  window.open("https://www.instagram.com/qq.vortex/", "_blank");
-}
-
-// Kalpler
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤️";
-  heart.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 5000);
-}, 600);
+// Hayır'a tıklanırsa (nadiren)
+noBtn.addEventListener("click", ()=>{
+  document.getElementById("main").classList.add("hidden");
+  document.getElementById("noBox").classList.remove("hidden");
+});
 </script>
 
 </body>
