@@ -83,14 +83,23 @@ a{
 
 <!-- 1. SAHNE -->
 <div class="box center" id="scene1">
-  <h2>Hazır mısın? (Bu bir anket sananların aksine SİTEDİR!Ama artık işlevi kalmamış bir site/PARANTEZLER SONRADAN OTOMATİK EKLENDİ)</h2>
+  <h2>
+    Hazır mısın?
+    (Bu bir anket sananların aksine SİTEDİR!
+    Ama artık işlevi kalmamış bir site
+    / PARANTEZLER SONRADAN OTOMATİK EKLENDİ)
+  </h2>
   <button class="yes" onclick="goScene2()">Hazırım</button>
 </div>
 
 <!-- 2. SAHNE -->
 <div class="box center hidden" id="scene2">
   <h2>Gerçekten hazır mısın?</h2>
-  <p>Bundan sonra geri dönüş yok.(-Allah olmayacak şeyi hayal ettirmezmiş sözüyle gaza gelmiştim sanırım...😑)</p>
+  <p>
+    Bundan sonra geri dönüş yok.
+    (-Allah olmayacak şeyi hayal ettirmezmiş sözüyle
+    gaza gelmiştim sanırım... 😑)
+  </p>
   <button class="yes" onclick="startAll()">Evet hazırım, başla artık</button>
 </div>
 
@@ -119,7 +128,8 @@ a{
 
   <p class="handwrite">
     Ben sana boşuna “sütlü çikolata” demiyorum.<br>
-    Herkes bitter / normal sever ama sütlü çikolata bir seçimdir 😉
+    Herkes bitter / normal sever ama
+    sütlü çikolata bir seçimdir 😉
   </p>
 
   <p>
@@ -133,7 +143,10 @@ a{
 
 <!-- 4. SAHNE -->
 <div class="box hidden center" id="scene4">
-  <h3>System32 içindeki yerini kabul ediyor musun? (EDİLMEDİ)</h3>
+  <h3>
+    System32 içindeki yerini kabul ediyor musun?
+    (EDİLMEDİ)
+  </h3>
 
   <div class="buttons" id="btnArea">
     <button class="yes" onclick="accept()">Evet</button>
@@ -143,10 +156,14 @@ a{
 
 <!-- EVET -->
 <div class="box hidden center" id="yesBox">
-  <h3>❤️ System32 başarıyla güncellendi ❤️(SONUÇ:BAŞARISIZ/Update Failed)</h3>
+  <h3>
+    ❤️ System32 başarıyla güncellendi ❤️
+    (SONUÇ: BAŞARISIZ / Update Failed)
+  </h3>
   <p>
     Eğer gerçekten kabul ettiysen (EDİLMEDİ)<br>
-    şimdiye kadar en anlamlı noktanı <strong>(.)</strong> atmak ister misin?
+    şimdiye kadar en anlamlı noktanı <strong>(.)</strong>
+    atmak ister misin?
   </p>
   <a href="https://www.instagram.com/direct/t/17848168302521420/" target="_blank">
     Sohbete git
@@ -155,8 +172,11 @@ a{
 
 <!-- HAYIR -->
 <div class="box hidden center" id="noBox">
-  <p>Canın sağ olsun.
-    (Anlıyorum, buna saygı duyuyorum. Dürüst olduğun için teşekkür ederim.)</p>
+  <p>
+    Canın sağ olsun.<br>
+    (Anlıyorum, buna saygı duyuyorum.
+    Dürüst olduğun için teşekkür ederim.)
+  </p>
   <p>
     Eğer kabul etmediysen lütfen <strong>2</strong> at<br>
     ve arkadaşlığımıza devam edelim.
@@ -193,7 +213,7 @@ function startAll(){
       } else {
         clearInterval(fade);
       }
-    }, 200);
+    },200);
   });
 }
 
@@ -211,19 +231,15 @@ function escape(){
   const maxX = area.clientWidth - noBtn.offsetWidth;
   const maxY = area.clientHeight - noBtn.offsetHeight;
 
-  const currentX = noBtn.offsetLeft || maxX / 2;
-  const currentY = noBtn.offsetTop  || maxY / 2;
+  const curX = noBtn.offsetLeft || maxX/2;
+  const curY = noBtn.offsetTop  || maxY/2;
 
-  let newX = currentX + (Math.random() * 160 - 80);
-  let newY = currentY + (Math.random() * 120 - 60);
+  let newX = curX + (Math.random()*160 - 80);
+  let newY = curY + (Math.random()*120 - 60);
 
-  newX = Math.max(0, Math.min(maxX, newX));
-  newY = Math.max(0, Math.min(maxY, newY));
-
-  noBtn.style.left = newX + "px";
-  noBtn.style.top  = newY + "px";
+  noBtn.style.left = Math.max(0,Math.min(maxX,newX))+"px";
+  noBtn.style.top  = Math.max(0,Math.min(maxY,newY))+"px";
 }
-
 
 ["mouseover","touchstart"].forEach(e=>{
   noBtn.addEventListener(e, escape);
